@@ -19,9 +19,8 @@ const Time = () => {
   return (
     <Text
       style={{
-        fontFamily: "Poppins",
+        fontFamily: "Inter Black",
         color: theme.palette.text.primary,
-        fontWeight: 800,
         fontSize: 80,
       }}
     >
