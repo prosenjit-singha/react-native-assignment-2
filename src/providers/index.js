@@ -1,5 +1,10 @@
 import { ThemeProvider } from "../context/theme.context";
+import FontsProvider from "./FontsProvider";
 
 export default function Providers({ children }) {
-  return <ThemeProvider>{children}</ThemeProvider>;
+  return (
+    <FontsProvider>
+      <ThemeProvider>{children}</ThemeProvider>
+    </FontsProvider>
+  );
 }

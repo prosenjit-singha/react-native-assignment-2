@@ -10,6 +10,7 @@ import Animated, {
   ReduceMotion,
 } from "react-native-reanimated";
 import HomeHeader from "./components/Header";
+import MiddleSection from "./components/MiddleSection";
 
 const iconRotationDuration = 500;
 const iconTimingOptions = {
@@ -48,6 +49,7 @@ export default function Home() {
       style={styles.container}
     >
       <HomeHeader />
+      <MiddleSection />
       {/* More Less Button */}
       <Button
         style={{ width: 105 }}
@@ -59,7 +61,6 @@ export default function Home() {
           </Animated.View>
         }
       />
-      <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
     </ImageBackground>
   );
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "start",
     padding: 18,
   },
 });
