@@ -12,7 +12,7 @@ import { timingOptions } from "../home.const";
 const BottomSection = ({ updateMaxY, more, maxY }) => {
   const { theme } = useCustomTheme();
   const animatedStyle = useAnimatedStyle(() => ({
-    bottom: withTiming(more ? 0 : -maxY, timingOptions),
+    transform: [{ translateY: withTiming(more ? 0 : maxY, timingOptions) }],
   }));
 
   return (
@@ -25,12 +25,12 @@ const BottomSection = ({ updateMaxY, more, maxY }) => {
           overflow: "hidden",
           zIndex: 2,
           position: "absolute",
-          bottom: -250,
           left: 0,
           width: "113%",
           backgroundColor: theme.darkMode
             ? "rgba(0,0, 0, 0.25)"
             : "rgba(255,255, 255, 0)",
+          transform: [{ translateY: 220 }],
         },
         animatedStyle,
       ]}

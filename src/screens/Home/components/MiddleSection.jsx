@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Text, TouchableHighlight, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import Time from "./HomeTime";
 import { useCustomTheme } from "../../../context/theme.context";
 import Button from "./Button";
@@ -44,11 +44,33 @@ const MiddleSection = ({ more, setMore, maxY }) => {
         wrapperAnimationStyles,
       ]}
     >
-      <View style={{ flexDirection: "row", gap: 16, alignItems: "center" }}>
-        <TouchableHighlight onPress={toggleTheme}>
-          <Image source={require("../../../../assets/moon.png")} />
-        </TouchableHighlight>
-        <Text style={{ color: theme.palette.text.primary }}>Good Evening</Text>
+      <View
+        style={{
+          flexDirection: "row",
+          gap: 16,
+          height: 40,
+          alignItems: "center",
+        }}
+      >
+        <TouchableOpacity
+          onPress={toggleTheme}
+          style={{ borderRadius: 100, overflow: "hidden" }}
+        >
+          {theme.darkMode ? (
+            <Image
+              source={require(`../../../../assets/moon.png`)}
+              style={{ width: 25 }}
+            />
+          ) : (
+            <Image
+              source={require(`../../../../assets/sunny.png`)}
+              style={{ width: 25, height: 25, objectFit: "cover" }}
+            />
+          )}
+        </TouchableOpacity>
+        <Text style={{ color: theme.palette.text.primary, fontWeight: 500 }}>
+          Good Evening
+        </Text>
       </View>
 
       <Time />

@@ -11,7 +11,7 @@ export default function HomeHeader({ updateMaxY, maxY, more }) {
   const { theme } = useCustomTheme();
 
   const animatedStyle = useAnimatedStyle(() => ({
-    top: withTiming(more ? -maxY : 0, timingOptions),
+    transform: [{ translateY: withTiming(more ? -maxY : 0, timingOptions) }],
   }));
 
   return (
@@ -23,7 +23,7 @@ export default function HomeHeader({ updateMaxY, maxY, more }) {
           flexDirection: "row",
           justifyContent: "space-between",
           position: "absolute",
-          top: maxY,
+          top: 0,
           left: 24,
           paddingTop: 50,
         },

@@ -52,7 +52,7 @@ export default function Home() {
         more={more}
         updateMaxY={updateMaxY}
       />
-      <StatusBar style="auto" />
+      <StatusBar style={theme.darkMode ? "light" : "dark"} />
     </ImageBackground>
   );
 }
