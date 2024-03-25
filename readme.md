@@ -6,4 +6,4 @@
 - animation added using react-native-reanimated
 
 **Preview Image**
-<img alt='Preview' src="./preview/preview.png" width="400" />
+<img alt='Preview' src="./previews/preview.png" width="400" />
