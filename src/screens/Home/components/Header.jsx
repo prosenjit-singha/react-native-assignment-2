@@ -1,17 +1,36 @@
 import { Image, Text, View, TouchableOpacity } from "react-native";
 import { useCustomTheme } from "../../../context/theme.context";
+import { timingOptions } from "../home.const";
+import Animated, {
+  useAnimatedStyle,
+  withTiming,
+} from "react-native-reanimated";
+import React from "react";
 
-export default function HomeHeader() {
+export default function HomeHeader({ updateMaxY, maxY, more }) {
   const { theme } = useCustomTheme();
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    top: withTiming(more ? -maxY : 0, timingOptions),
+  }));
+
   return (
-    <View
-      style={{
-        gap: 24,
-        flexDirection: "row",
-        padding: 18,
-      }}
+    <Animated.View
+      onLayout={(e) => updateMaxY(e.nativeEvent.layout.height)}
+      style={[
+        {
+          gap: 24,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          position: "absolute",
+          top: maxY,
+          left: 24,
+          paddingTop: 50,
+        },
+        animatedStyle,
+      ]}
     >
-      <View style={{ gap: 14 }}>
+      <View style={{ gap: 14, width: "80%" }}>
         <Text
           style={{
             color: theme.palette.text.primary,
@@ -37,6 +56,6 @@ export default function HomeHeader() {
           source={require("../../../../assets/reload-icon.png")}
         />
       </TouchableOpacity>
-    </View>
+    </Animated.View>
   );
 }

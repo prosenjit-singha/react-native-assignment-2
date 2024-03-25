@@ -21,10 +21,18 @@ const Time = () => {
       style={{
         fontFamily: "Inter Black",
         color: theme.palette.text.primary,
-        fontSize: 80,
+        fontSize: 100,
       }}
     >
-      {date.format("HH:MM")}
+      {date.format("HH:MM")}{" "}
+      <Text
+        style={{
+          fontFamily: "Inter Bold",
+          fontSize: 28,
+        }}
+      >
+        BST
+      </Text>
     </Text>
   );
 };
