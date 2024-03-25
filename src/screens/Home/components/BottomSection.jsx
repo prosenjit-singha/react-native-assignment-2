@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, useColorScheme } from "react-native";
 import { BlurView } from "expo-blur";
 import { useCustomTheme } from "../../../context/theme.context";
 
@@ -10,6 +10,7 @@ import Animated, {
 import { timingOptions } from "../home.const";
 
 const BottomSection = ({ updateMaxY, more, maxY }) => {
+  const { theme } = useCustomTheme();
   const animatedStyle = useAnimatedStyle(() => ({
     bottom: withTiming(more ? 0 : -maxY, timingOptions),
   }));
@@ -26,11 +27,19 @@ const BottomSection = ({ updateMaxY, more, maxY }) => {
           position: "absolute",
           bottom: -250,
           left: 0,
+          width: "113%",
+          backgroundColor: theme.darkMode
+            ? "rgba(0,0, 0, 0.25)"
+            : "rgba(255,255, 255, 0)",
         },
         animatedStyle,
       ]}
     >
-      <BlurView intensity={50} tint="dark" style={styles.wrapper}>
+      <BlurView
+        intensity={30}
+        tint={theme.darkMode ? "dark" : "light"}
+        style={styles.wrapper}
+      >
         <Item label="Current time zone" value="Europe/London" />
         <Item label="Day of the year" value="295" />
         <Item label="Day of the week" value="5" />

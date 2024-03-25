@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Text, View } from "react-native";
+import { Image, Text, TouchableHighlight, View } from "react-native";
 import Time from "./HomeTime";
 import { useCustomTheme } from "../../../context/theme.context";
 import Button from "./Button";
@@ -12,7 +12,7 @@ import { timingOptions } from "../home.const";
 
 const MiddleSection = ({ more, setMore, maxY }) => {
   const iconRotation = useSharedValue(0);
-  const { theme } = useCustomTheme();
+  const { theme, toggleTheme } = useCustomTheme();
 
   const wrapperAnimationStyles = useAnimatedStyle(() => ({
     transform: [{ translateY: withTiming(more ? -maxY : 0, timingOptions) }],
@@ -45,7 +45,9 @@ const MiddleSection = ({ more, setMore, maxY }) => {
       ]}
     >
       <View style={{ flexDirection: "row", gap: 16, alignItems: "center" }}>
-        <Image source={require("../../../../assets/moon.png")} />
+        <TouchableHighlight onPress={toggleTheme}>
+          <Image source={require("../../../../assets/moon.png")} />
+        </TouchableHighlight>
         <Text style={{ color: theme.palette.text.primary }}>Good Evening</Text>
       </View>
 

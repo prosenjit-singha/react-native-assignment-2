@@ -28,7 +28,7 @@ const Time = () => {
       <Text
         style={{
           fontFamily: "Inter Bold",
-          fontSize: 28,
+          fontSize: 24,
         }}
       >
         BST
