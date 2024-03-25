@@ -10,13 +10,9 @@ import Animated, {
 } from "react-native-reanimated";
 import { timingOptions } from "../home.const";
 
-const MiddleSection = ({ more, setMore, maxY }) => {
+const MiddleSection = ({ more, setMore }) => {
   const iconRotation = useSharedValue(0);
   const { theme, toggleTheme } = useCustomTheme();
-
-  const wrapperAnimationStyles = useAnimatedStyle(() => ({
-    transform: [{ translateY: withTiming(more ? -maxY : 0, timingOptions) }],
-  }));
 
   const handleToggleMore = () => {
     setMore((prev) => {
@@ -34,15 +30,13 @@ const MiddleSection = ({ more, setMore, maxY }) => {
   );
 
   return (
-    <Animated.View
-      style={[
-        {
-          alignItems: "flex-start",
-          width: "100%",
-          marginVertical: 24,
-        },
-        wrapperAnimationStyles,
-      ]}
+    <View
+      style={{
+        alignItems: "flex-start",
+        width: "100%",
+        marginVertical: 24,
+        paddingHorizontal: 24,
+      }}
     >
       <View
         style={{
@@ -98,7 +92,7 @@ const MiddleSection = ({ more, setMore, maxY }) => {
           </Animated.View>
         }
       />
-    </Animated.View>
+    </View>
   );
 };
 

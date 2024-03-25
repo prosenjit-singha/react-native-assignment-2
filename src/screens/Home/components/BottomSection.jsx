@@ -1,22 +1,13 @@
 import React from "react";
-import { View, StyleSheet, Text, useColorScheme } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { BlurView } from "expo-blur";
 import { useCustomTheme } from "../../../context/theme.context";
 
-import Animated, {
-  withTiming,
-  useAnimatedStyle,
-} from "react-native-reanimated";
-import { timingOptions } from "../home.const";
-
-const BottomSection = ({ updateMaxY, more, maxY }) => {
+const BottomSection = ({ updateMaxY }) => {
   const { theme } = useCustomTheme();
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: withTiming(more ? 0 : maxY, timingOptions) }],
-  }));
 
   return (
-    <Animated.View
+    <View
       onLayout={(e) => updateMaxY(e.nativeEvent.layout.height)}
       style={[
         {
@@ -26,13 +17,13 @@ const BottomSection = ({ updateMaxY, more, maxY }) => {
           zIndex: 2,
           position: "absolute",
           left: 0,
-          width: "113%",
+          bottom: 0,
+          width: "100%",
           backgroundColor: theme.darkMode
             ? "rgba(0,0, 0, 0.25)"
             : "rgba(255,255, 255, 0)",
-          transform: [{ translateY: 220 }],
+          transform: [{ translateY: 270 }],
         },
-        animatedStyle,
       ]}
     >
       <BlurView
@@ -45,7 +36,7 @@ const BottomSection = ({ updateMaxY, more, maxY }) => {
         <Item label="Day of the week" value="5" />
         <Item label="Week number" value="42" />
       </BlurView>
-    </Animated.View>
+    </View>
   );
 };
 
@@ -69,6 +60,7 @@ const styles = StyleSheet.create({
     minHeight: 100,
     padding: 24,
     borderRadius: 15,
+    paddingBottom: 40,
   },
   itemWrapper: {
     flexDirection: "row",

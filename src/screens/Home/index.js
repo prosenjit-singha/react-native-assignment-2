@@ -1,5 +1,11 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, ImageBackground, Image } from "react-native";
+import {
+  StyleSheet,
+  ImageBackground,
+  Image,
+  SafeAreaView,
+  View,
+} from "react-native";
 import React, { useState } from "react";
 import HomeHeader from "./components/Header";
 import MiddleSection from "./components/MiddleSection";
@@ -21,6 +27,12 @@ export default function Home() {
   const updateMaxY = (value) =>
     setMaxYToTranslate((prev) => (value > prev ? value : prev));
 
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateY: withTiming(more ? -maxYToTranslate : 0, timingOptions) },
+    ],
+  }));
+
   React.useEffect(() => {
     opacity.value = withTiming(theme.darkMode ? 0 : 1, timingOptions);
   }, [theme.darkMode]);
@@ -29,7 +41,7 @@ export default function Home() {
     <ImageBackground
       source={require("../../../assets/bg-1.png")}
       resizeMode="cover"
-      style={styles.container}
+      style={{ flex: 1, zIndex: 1, position: "relative" }}
     >
       <Animated.Image
         source={require("../../../assets/bg-light.jpg")}
@@ -39,32 +51,39 @@ export default function Home() {
             height: "110%",
             width: "120%",
             objectFit: "cover",
+            opacity: theme.darkMode ? 0 : 1,
           },
           {
             opacity,
           },
         ]}
       />
-      <HomeHeader maxY={maxYToTranslate} more={more} updateMaxY={updateMaxY} />
-      <MiddleSection maxY={maxYToTranslate} more={more} setMore={setMore} />
-      <BottomSection
-        maxY={maxYToTranslate}
-        more={more}
-        updateMaxY={updateMaxY}
-      />
+      <SafeAreaView style={{ flex: 1 }}>
+        <Animated.View
+          style={[
+            {
+              flex: 1,
+              position: "relative",
+              justifyContent: "flex-end",
+              // transform: [{ translateY: 100 }],
+            },
+            animatedStyle,
+          ]}
+        >
+          <HomeHeader
+            maxY={maxYToTranslate}
+            more={more}
+            updateMaxY={updateMaxY}
+          />
+          <MiddleSection maxY={maxYToTranslate} more={more} setMore={setMore} />
+          <BottomSection
+            maxY={maxYToTranslate}
+            more={more}
+            updateMaxY={updateMaxY}
+          />
+        </Animated.View>
+      </SafeAreaView>
       <StatusBar style={theme.darkMode ? "light" : "dark"} />
     </ImageBackground>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "flex-end",
-    padding: 24,
-    paddingTop: 50,
-    position: "relative",
-    zIndex: 1,
-  },
-});
